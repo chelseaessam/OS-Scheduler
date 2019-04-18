@@ -168,12 +168,21 @@ class Window3(QMainWindow):
       i=0
       while ((ls.size())!=0 or (temp.size())!=0):
               head=ls.getHead()
+              
+            
               while head is not None:
-                  if(head.getarrivaltime()<=time or head.getarrivaltime()<=time+quantum ):
-                     temp.append(head.getname(),head.getbursttime(),head.getarrivaltime())
-                     #temp.swap_head_and_tail()
-                     ls.remove(head.getname())
+                  if(temp.size()==0):
+                      if(head.getarrivaltime()<=time ):
+                         temp.append(head.getname(),head.getbursttime(),head.getarrivaltime())
+                         ls.remove(head.getname())
+                  else:
+                       if(head.getarrivaltime()<=time or head.getarrivaltime()<=time+quantum):
+                         temp.append(head.getname(),head.getbursttime(),head.getarrivaltime())
+                         ls.remove(head.getname())
+                      
                   head=head.getNext()
+         
+                  
                   
               if(temp.size()!=0):
                   
@@ -198,7 +207,7 @@ class Window3(QMainWindow):
                       temp.remove(head2.getname())
                       
                   else:
-                     temp.swap_head_and_tail()
+                      temp.swap_head_and_tail()
                       
               else:
                   time=time+1
